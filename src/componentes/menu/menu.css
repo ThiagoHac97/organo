@@ -1,0 +1,31 @@
+.menu{
+    background-color: #bbaf90;
+    height: 100px;
+    width: 100%;
+    max-width: 100%;
+    color: #ffffff;
+    font-size: 20px;
+}
+.menuList{
+    list-style-type: none;
+    display: grid;
+    grid-auto-flow: column;
+}
+.menuList li{
+
+}
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  width: 170px;
+  height:120px;
+  margin-left: 45px;
+  background-color: #eadbb4;
+  color: #937119;
+  padding: 20px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-list:hover .dropdown-content {display: block;}
+.dropdown-content a:hover {background-color: #d3c5a2;}

@@ -13,13 +13,6 @@ const Formulario = (props) => {
     const [endereco, setEndereco] = useState('')
     const [category, setCategory] = useState('')
 
-    const categoria = [
-        'Imóvel',
-        'Lote',
-        'Apartamento',
-        'Ponto Comercial'
-    ]
-
     const aoSalvar = (evento) => {
         evento.preventDefault()
         props.aoImovel({
@@ -30,6 +23,12 @@ const Formulario = (props) => {
             endereco,
             category
         })
+        setTitulo('')
+        setPreco('')
+        setDescricao('')
+        setArea('')
+        setEndereco('')
+        setCategory('')
     }
     return(
         <section className='formulario'>
@@ -73,7 +72,7 @@ const Formulario = (props) => {
             <ListaSuspensa 
             obrigatorio={true}  
             label="Categoria" 
-            itens={categoria}
+            itens={props.categoriaImoveis}
             valor={category}
             aoAlterado={valor => setCategory(valor)}
             />
