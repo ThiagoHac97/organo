@@ -4,49 +4,67 @@ import Formulario from './componentes/Formulario/Formulario';
 import Imoveis from './componentes/Imoveis/Imoveis';
 import Rodape from './componentes/rodape/rodape';
 import Menu from './componentes/menu/menu';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   
-  const categoriaImoveis =[
+  const [categoriaImoveis, setcategoriaImoveis] = useState([
     {
+      id: uuidv4(),
       nome:'Imóvel',
-      corPrimaria: '#57c278',
-      corSecundaria: '#d9f7e9'
+      cor: '#d9f7e9'
     },
     {
+      id: uuidv4(),
       nome:'Lote',
-      corPrimaria: '#82cffa',
-      corSecundaria: '#e8f8ff'
+      cor: '#e8f8ff'
     },
     {
+      id: uuidv4(),
       nome:'Apartamento',
-      corPrimaria: '#e06869',
-      corSecundaria: '#fde7e8'
+      cor: '#fde7e8'
     },
     {
+      id: uuidv4(),
       nome:'Ponto Comercial',
-      corPrimaria: '#db6ebf',
-      corSecundaria: '#fae9f5'
+      cor: '#fae9f5'
     },
-  ]
-  const [imoveis, setImoveis] = useState([])
+  ])
+  const [imoveis, setImoveis] = useState([""])
 
   const aoNovoImovel = (imovel) =>{
     console.log(imovel)
     setImoveis([...imoveis, imovel])
   }
+
+function deletarImovel(props){
+  console.log('deletando imovel', props)
+}
+
+function mudarCorDaCategoria(cor, id){
+  setcategoriaImoveis(categoriaImoveis.map(categoria =>{
+    if(categoria.id=== id){
+      categoria.cor = cor;
+    }
+    return categoria;
+  }))
+}
+
   return (
     <div className="App">
       <Banner/>
       <Menu/>
       <Formulario categoriaImoveis={categoriaImoveis.map(categoriaImoveis => categoriaImoveis.nome)} aoImovel={imovel => aoNovoImovel(imovel)} />
-      {categoriaImoveis.map(categoriaImoveis => <Imoveis 
-      key={categoriaImoveis.nome} 
-      nome = {categoriaImoveis.nome} 
-      corPrimaria={categoriaImoveis.corPrimaria} 
-      corSecundaria={categoriaImoveis.corSecundaria}
-      imoveis = {imoveis.filter(imovel => imovel.category === categoriaImoveis.nome)}
-      />)}
+      {categoriaImoveis.map(categoriaImoveis => 
+        <Imoveis
+         mudarCor = {mudarCorDaCategoria}
+          key={categoriaImoveis.nome} 
+          nome = {categoriaImoveis.nome} 
+          cor= {categoriaImoveis.cor}
+          id = {categoriaImoveis.id} 
+          imoveis = {imoveis.filter(imovel => imovel.category === categoriaImoveis.nome)}
+          aoDeletar = {deletarImovel}
+        />)}
       <Rodape />
     </div>
   );
